@@ -32,9 +32,6 @@ class ViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.view.backgroundColor = UIColor.purple
-        
-        
         
         // Initialize
         let items = ["Purple", "Green", "Blue"]
@@ -50,13 +47,23 @@ class ViewController: UIViewController {
         customSC.tintColor = UIColor.white
         
         // Add target action method
-        customSC.addTarget(self, action: "changeColor:", for: .valueChanged)
-        
+        customSC.addTarget(self, action: #selector(changeColor(sender:)), for: .valueChanged)
         // Add this custom Segmented Control to our view
         self.view.addSubview(customSC)
     }
+    
     func changeColor (sender: UISegmentedControl) {
-        switch sender.
+        switch sender.selectedSegmentIndex {
+        case 1:
+            self.view.backgroundColor = UIColor.green
+            print("Green")
+        case 2:
+            self.view.backgroundColor = UIColor.blue
+            print("Blue")
+        default:
+            self.view.backgroundColor = UIColor.purple
+            print("Purple")
+        }
     }
 
 }
