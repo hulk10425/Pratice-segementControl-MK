@@ -9,12 +9,10 @@
 import UIKit
 
 class SegementedControl: UISegmentedControl {
-    
+
     let items = ["Purple", "Green", "Blue"]
 
-    
 //    self.(items: items)
-    
 
     /*
     // Only override draw() if you perform custom drawing.
