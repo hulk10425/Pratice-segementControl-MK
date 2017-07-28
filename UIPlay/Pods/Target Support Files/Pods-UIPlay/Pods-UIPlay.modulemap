@@ -1,0 +1,6 @@
+framework module Pods_UIPlay {
+  umbrella header "Pods-UIPlay-umbrella.h"
+
+  export *
+  module * { export * }
+}
