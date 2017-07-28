@@ -13,7 +13,7 @@ import CoreLocation
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     let items = ["Purple", "Green", "Blue"]
-    var locationManager: CLLocationManager?
+    var locationManager = CLLocationManager()
     let distanceSpan: Double = 500
     let mapView = MKMapView()
 
@@ -21,14 +21,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blue
 
-        self.locationManager = CLLocationManager()
-        if let locationManager = self.locationManager {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-            locationManager.requestAlwaysAuthorization()
-            locationManager.distanceFilter = 50
-            locationManager.startUpdatingLocation()
-        }
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.activityType = .automotiveNavigation
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        mapView.userTrackingMode = .followWithHeading
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,12 +89,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             print("Purple")
         }
     }
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-
-            let region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate, self.distanceSpan, self.distanceSpan)
-            self.mapView.setRegion(region, animated: true)
-            self.mapView.showsUserLocation = true
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let corrdinate = locations[0].coordinate
+        print(corrdinate.latitude)
+        print(corrdinate.longitude)
     }
 
 }
